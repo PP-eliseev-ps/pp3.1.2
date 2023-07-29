@@ -5,8 +5,7 @@ import com.example.spring_boot.model.User;
 import java.util.List;
 
 public interface UserService {
-    List<User> getAllUsers();
-
+    List<User> findAllUser();
     void save(User user);
     User getUser(Long id);
     void delete(Long id);

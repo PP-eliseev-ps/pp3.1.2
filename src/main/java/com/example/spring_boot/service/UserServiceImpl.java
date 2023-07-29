@@ -1,8 +1,9 @@
 package com.example.spring_boot.service;
 
-import com.example.spring_boot.dao.UserDao;
 import com.example.spring_boot.model.User;
+import com.example.spring_boot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,31 +13,32 @@ import java.util.List;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-    private final UserDao userDao;
+
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+    public List<User> findAllUser() {
+        return userRepository.findAll(Sort.by("id"));
     }
 
     @Override
     public void save(User user) {
-        userDao.save(user);
+        userRepository.save(user);
     }
 
     @Override
     public User getUser(Long id) {
-        return userDao.getUser(id);
+        return userRepository.getReferenceById(id);
     }
 
     @Override
     public void delete(Long id) {
-        userDao.delete(id);
+        userRepository.deleteById(id);
     }
 }
