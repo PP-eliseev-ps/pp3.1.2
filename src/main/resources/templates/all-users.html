@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Users</title>
+</head>
+<body>
+<table style="border-collapse: collapse; width: auto;">
+    <thead>
+    <tr>
+        <th style="border: 1px solid black; padding: 8px;">ID</th>
+        <th style="border: 1px solid black; padding: 8px;">Name</th>
+        <th style="border: 1px solid black; padding: 8px;">Surname</th>
+        <th style="border: 1px solid black; padding: 8px;">Age</th>
+        <th style="border: 1px solid black; padding: 8px;">Operations</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${allUsers}">
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.id}"></td>
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.name}"></td>
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.surname}"></td>
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.age}"></td>
+        <td style="border: 1px solid black; padding: 8px; width: auto;">
+            <form th:action="@{/update}" method="get" style="display: inline-block;">
+                <input type="hidden" name="id" th:value="${user.id}"/>
+                <button type="submit">Update</button>
+            </form>
+            <form th:action="@{/delete}" method="get" style="display: inline-block;">
+                <input type="hidden" name="id" th:value="${user.id}"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="4" style="text-align: left; padding-top: 10px;">
+            <button onclick="window.location.href = '/add'">Add User</button>
+        </td>
+    </tr>
+    </tfoot>
+</table>
+</body>
+</html>
