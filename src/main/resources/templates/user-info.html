@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User info</title>
+</head>
+<body>
+<form th:action="@{/saveUser}" th:object="${user}" th:method="post">
+    <div style="display:flex; flex-direction:column; align-items: flex-start;">
+        <label for="id" hidden="hidden">ID:</label>
+        <input hidden="hidden" type="text" id="id" th:field="*{id}"/>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" th:field="*{surname}"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
+
+        <label for="age">Age:</label>
+        <input type="text" id="age" th:field="${user.age}"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>
+    </div>
+    <button type="submit" style="text-align: left; margin-top: 10px;">Save User</button>
+</form>
+</body>
+</html>
