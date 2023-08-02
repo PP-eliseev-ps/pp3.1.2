@@ -1,29 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User info</title>
+    <title>User Information</title>
 </head>
 <body>
-<form th:action="@{/saveUser}" th:object="${user}" th:method="post">
-    <div style="display:flex; flex-direction:column; align-items: flex-start;">
-        <label for="id" hidden="hidden">ID:</label>
-        <input hidden="hidden" type="text" id="id" th:field="*{id}"/>
-
-        <label for="name">Name:</label>
-        <input type="text" id="name" th:field="*{name}"/>
-        <div style="color: darkred" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
-
-        <label for="surname">Surname:</label>
-        <input type="text" id="surname" th:field="*{surname}"/>
-        <div style="color: darkred" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
-
-        <label for="age">Age:</label>
-        <input type="text" id="age" th:field="${user.age}"/>
-        <div style="color: darkred" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>
-    </div>
-    <button type="submit" style="text-align: left; margin-top: 10px;">Save User</button>
-</form>
+<table style="border-collapse: collapse; width: auto;">
+    <thead>
+    <tr>
+        <th style="border: 1px solid black; padding: 8px;">ID</th>
+        <th style="border: 1px solid black; padding: 8px;">Name</th>
+        <th style="border: 1px solid black; padding: 8px;">Surname</th>
+        <th style="border: 1px solid black; padding: 8px;">Age</th>
+        <th style="border: 1px solid black; padding: 8px;">Username</th>
+        <th style="border: 1px solid black; padding: 8px;">Roles</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:object="${user}">
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.id}"></td>
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.name}"></td>
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.surname}"></td>
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.age}"></td>
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.username}"></td>
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.roles}"></td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="4" style="text-align: left; padding-top: 50px;">
+            <form th:action="@{/logout}" method="get" style="display: inline-block;">
+                <button type="submit">Logout</button>
+            </form>
+        </td>
+    </tr>
+    </tfoot>
+</table>
 </body>
 </html>
