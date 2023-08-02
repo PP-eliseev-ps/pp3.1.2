@@ -12,6 +12,9 @@
         <th style="border: 1px solid black; padding: 8px;">Name</th>
         <th style="border: 1px solid black; padding: 8px;">Surname</th>
         <th style="border: 1px solid black; padding: 8px;">Age</th>
+        <th style="border: 1px solid black; padding: 8px;">Username</th>
+        <th style="border: 1px solid black; padding: 8px;">Password</th>
+        <th style="border: 1px solid black; padding: 8px;">Roles</th>
         <th style="border: 1px solid black; padding: 8px;">Operations</th>
     </tr>
     </thead>
@@ -21,13 +24,17 @@
         <td style="border: 1px solid black; padding: 8px;" th:text="${user.name}"></td>
         <td style="border: 1px solid black; padding: 8px;" th:text="${user.surname}"></td>
         <td style="border: 1px solid black; padding: 8px;" th:text="${user.age}"></td>
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.username}"></td>
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.password}"></td>
+        <td style="border: 1px solid black; padding: 8px;" th:text="${user.roles}"></td>
         <td style="border: 1px solid black; padding: 8px; width: auto;">
-            <form th:action="@{/update}" method="get" style="display: inline-block;">
+            <form th:action="@{/admin/update}" method="get" style="display: inline-block;">
                 <input type="hidden" name="id" th:value="${user.id}"/>
                 <button type="submit">Update</button>
             </form>
-            <form th:action="@{/delete}" method="get" style="display: inline-block;">
+            <form th:action="@{/admin/delete}" method="post" style="display: inline-block;">
                 <input type="hidden" name="id" th:value="${user.id}"/>
+                <input type="hidden" name="_method" value="delete"/>
                 <button type="submit">Delete</button>
             </form>
         </td>
@@ -36,7 +43,16 @@
     <tfoot>
     <tr>
         <td colspan="4" style="text-align: left; padding-top: 10px;">
-            <button onclick="window.location.href = '/add'">Add User</button>
+            <form th:action="@{/admin/add}" method="get" style="display: inline-block;">
+                <button type="submit">Add User</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align: left; padding-top: 50px;">
+            <form th:action="@{/logout}" method="get" style="display: inline-block;">
+                <button type="submit">Logout</button>
+            </form>
         </td>
     </tr>
     </tfoot>
